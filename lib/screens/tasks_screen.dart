@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import '../widgets/tasks_list.dart';
+import 'add_new_task.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.black54,
         child: Icon(
           Icons.add,
         ),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => SingleChildScrollView(
+                      child: Container(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: AddNewTask(),
+                  )));
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +42,7 @@ class TasksScreen extends StatelessWidget {
                   child: Icon(
                     Icons.list,
                     size: 30,
-                    color: Colors.lightBlueAccent,
+                    color: Colors.black54,
                   ),
                 ),
                 SizedBox(
@@ -78,6 +90,7 @@ class TasksScreen extends StatelessWidget {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30)),
               ),
+              child: TasksList(),
             ),
           ),
         ],
@@ -85,19 +98,3 @@ class TasksScreen extends StatelessWidget {
     );
   }
 }
-
-//
-//Flexible(
-//child: Container(
-//child: Column(
-//children: <Widget>[
-//Row(),
-//Row(),
-//Row(),
-//],
-//),
-//decoration: BoxDecoration(
-//color: const Color(0xffffffff),
-//),
-//),
-//),
